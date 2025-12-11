@@ -52,7 +52,7 @@ variable "each_vm" {
 
 ### Решение 2
 
-------
+Ссылка на файл [count-vm.tf](https://github.com/pythonyandex/Terraform_L3/blob/main/Terraform_count-vm_t2.tf)
 
 ### Задание 3
 
@@ -61,7 +61,7 @@ variable "each_vm" {
 
 ### Решение 3
 
-------
+Ссылка на файл [disk_vm.tf](https://github.com/pythonyandex/Terraform_L3/blob/main/Terraform_disk_vm_t3.tf)
 
 ### Задание 4
 
