@@ -30,6 +30,8 @@
 Приложите скриншот входящих правил «Группы безопасности» в ЛК Yandex Cloud .
 ### Решение 1
 
+Скриншот на ![Группы безопасности» в ЛК Yandex Cloud](https://github.com/pythonyandex/Terraform_L3/blob/main/terraform_security_group_t1.png) 
+
 ------
 
 ### Задание 2
