@@ -6,7 +6,7 @@ data "yandex_compute_image" "ubuntu" {
 resource "yandex_compute_instance" "web" {
   count = 2
   
-  name        = "web-${count.index + 1}"  # web-1 и web-2 (не web-0 и web-1)
+  name        = "web-${count.index + 1}"  
   platform_id = "standard-v3"
   zone        = var.default_zone
 
@@ -31,7 +31,6 @@ resource "yandex_compute_instance" "web" {
   network_interface {
     subnet_id = yandex_vpc_subnet.develop.id
     nat       = true
-    # Назначаем Security Group, созданную в первом задании
     security_group_ids = [yandex_vpc_security_group.example.id]
   }
 
@@ -41,7 +40,6 @@ resource "yandex_compute_instance" "web" {
   }
 }
 
-# Output для удобства просмотра IP адресов
 output "web_vm_ips" {
   value = {
     for idx, vm in yandex_compute_instance.web :
