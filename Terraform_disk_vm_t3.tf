@@ -1,8 +1,3 @@
-# Файл disk_vm.tf
-# 1. Создание 3 одинаковых виртуальных дисков с использованием count
-# 2. Создание ВМ "storage" с подключением этих дисков
-
-# Часть 1: Создание 3 дисков
 resource "yandex_compute_disk" "storage" {
   count = 3
   
@@ -19,15 +14,12 @@ resource "yandex_compute_disk" "storage" {
   }
 }
 
-# Часть 2: Создание одиночной ВМ "storage" 
-# (без использования count или for_each на самом ресурсе ВМ)
 
 data "yandex_compute_image" "ubuntu_storage" {
   family = "ubuntu-2204-lts"
 }
 
 resource "yandex_compute_instance" "storage" {
-  # ОДИНОЧНАЯ ВМ - без count или for_each
   name        = "storage"
   platform_id = "standard-v3"
   zone        = var.default_zone
@@ -66,8 +58,6 @@ resource "yandex_compute_instance" "storage" {
     managed-by = "terraform"
   }
 
-  # Подключение дополнительных дисков с использованием dynamic и for_each
-  # Создаем map из созданных дисков для использования в for_each
   dynamic "secondary_disk" {
     for_each = { for idx, disk in yandex_compute_disk.storage : idx => disk.id }
     
