@@ -1,0 +1,25 @@
+[webservers]
+%{ for instance in web_instances ~}
+${instance.name} ansible_host=${instance.network_interface[0].nat_ip_address} fqdn=${replace(instance.fqdn, "auto.internal", "${instance.zone}.internal")}
+%{ endfor ~}
+
+[databases]
+%{ for instance in db_instances ~}
+${instance.name} ansible_host=${instance.network_interface[0].nat_ip_address} fqdn=${replace(instance.fqdn, "auto.internal", "${instance.zone}.internal")}
+%{ endfor ~}
+
+[storage]
+%{ for instance in storage_instances ~}
+${instance.name} ansible_host=${instance.network_interface[0].nat_ip_address} fqdn=${replace(instance.fqdn, "auto.internal", "${instance.zone}.internal")}
+%{ endfor ~}
+
+[all:children]
+web
+db
+storage
+
+[all:vars]
+ansible_user=ubuntu
+ansible_ssh_private_key_file=~/.ssh/id_ed25519
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'
+ansible_python_interpreter=/usr/bin/python3
